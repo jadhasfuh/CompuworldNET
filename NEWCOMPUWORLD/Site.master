@@ -1,0 +1,111 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeFile="Site.master.vb" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es-mx">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tienda en línea de Compumundo Hipermega red" />
+    <meta name="keywords" content="tienda, computo, accesorios, memorias, bocinas, ciber" />
+    <meta name="author" content="Adrian Ceja Renteria" />
+    <meta name="copyright" content="Adrian Ceja Renteria 2020" />
+    <meta name="robots" content="index" />
+    <meta http-equiv="expires" content="43200" />
+    <meta name="robots" content="follow" />
+    <title><%: Page.Title %> - CMHMR</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <form runat="server" novalidate>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <%--NAVBAR--%>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 shadow-sm fixed-top">
+            <a href="/Inicio" class="navbar-brand font-weight-bold mr-auto" style="color: darkgrey">
+                <img src="/Img/Iconos/LOGO.png" class="logo" />CHMR</a>
+            <div id="navbarContent" class="collapse navbar-collapse order-sm-12 order-lg-1">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <asp:LinkButton ID="btnHardware" CssClass="nav-link font-weight-bold" runat="server" Text="Hardware" ValidationGroup="false"/>
+                    <li class="nav-item">
+                        <asp:LinkButton ID="btnGadgets" CssClass="nav-link font-weight-bold" runat="server" Text="Gadgets"  ValidationGroup="false"/>
+                    <li class="nav-item">
+                        <asp:LinkButton ID="btnElectronica" CssClass="nav-link font-weight-bold" runat="server" Text="Electrónica" ValidationGroup="false" />
+                    <li class="nav-item">
+                        <asp:LinkButton ID="btnPapeleria" CssClass="nav-link font-weight-bold" runat="server" Text="Papelería"  ValidationGroup="false"/>
+                    <li class="nav-item"><a href="/Contact.aspx" class="nav-link font-weight-bold">Contacto&nbsp;</a></li>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <%-- LOGIN--%>
+                            <li class="nav-item">
+                                <a class="nav-link" runat="server" href="~/Account/Login">
+                                    <img src="/Img/Iconos/logIn.png" class="icono" />&nbsp;&nbsp;&nbsp;</a>
+                            </li>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <li class="nav-item">
+                                <a class="nav-link  font-weight-bold" runat="server" href="~/Account/Manage" title="Manage your account">Mi cuenta
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                &nbsp;<asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutPageUrl="/Account/Login" OnLoggingOut="Unnamed_LoggingOut" LogoutImageUrl="/Img/Iconos/logOut.png" CssClass="logout" />&nbsp;
+                            </li>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                    <li class="nav-item" runat="server" id="adOptions">
+                        <asp:LinkButton CssClass="nav-link  font-weight-bold" runat="server" ID="btnAdm" Text="Sitio" />
+                    </li>
+                    <li class="nav-item" runat="server" id="clOptions">
+                        <a class="nav-link font-weight-bold " href="/Account/Carrito.aspx">
+                            <img src="/Img/Iconos/carro.png" class="icono" />&nbsp;&nbsp;
+                        </a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    <div class="form-group" role="search">
+                        <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control mr-sm-2" placeholder="Articulo, marca ..."></asp:TextBox>
+                        <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-secondary my-2 my-sm-0" Text="Buscar" type="button" UseSubmitBehavior="false" />
+                    </div>
+                </div>
+            </div>
+            <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler order-md-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <%--/NAVBAR--%>
+        <br />
+
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <footer class="page-footer fixed-bottom  bg-dark footer">
+            <center><p >&copy; <%: DateTime.Now.Year %> - Compumundo Hiper Mega Red &copy;</p></center>
+        </footer>
+    </form>
+
+</body>
+</html>
